@@ -213,23 +213,3 @@ var bar = function() {
 //     console.log(myVar);
 //     let myVar = 20;
 // })();
-
-
-
-
-
-
-
-console.log(foo);
-var foo = "bar";
-
-var baz = function() {
-    console.log("Hello");
-    return 10;
-};
-console.log(baz());
-
-function qux() {
-    console.log("Hi");
-}
-qux();
