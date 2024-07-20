@@ -8,7 +8,7 @@
 //     var x = 20;
 //     function bar() {
 //         console.log(x);
-//         var x = 30;
+//         x = 30;
 //     }
 //     bar();
 // }
@@ -94,8 +94,15 @@
 
 // 5. Explain the output of the console.log statements. How does the lexical environment affect this?
 
-// (function() {
+// var x = 5
+// var x = 15
+// var y = 16
+
+
+// ;(function() {
+//     console.log(x + y);
 //     var x = 10
+//     console.log(x)
 //     var y = 10
 // })();
 
@@ -205,7 +212,7 @@ var x = 1;
 function test() {
     var x = 2;
     {
-        let x = 3;
+        var x = 3;
         console.log(x); // What will this log?
     }
     console.log(x); // What will this log?
@@ -218,10 +225,10 @@ console.log(x); // What will this log?
 
 
 
-var a = 20
+// var a = 20
 
-function foo() {
-    console.log(a);
-}
+// function foo() {
+//     console.log(a);
+// }
 
-foo();
+// foo();
