@@ -179,13 +179,13 @@ var student = {
     }
 }
 
-var person = (name, age) => ({
-    name: name,
-    age: age
-})
+function person(name, age){
+    this.name = name;
+    this.age = age
+}
 
-var P1 = person('John', 30);
-var P2 = person('Jane', 25);
+var P1 = new person('John', 30);
+var P2 = new person('Jane', 25);
 // var S1 = new student();
 // student.__proto__ = P1;
 student.code();
@@ -197,6 +197,11 @@ student.code();
 
 
 
+
+// var person = (name, age) => ({
+//     name: name,
+//     age: age
+// })
   
   
   

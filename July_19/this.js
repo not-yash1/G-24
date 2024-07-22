@@ -31,7 +31,7 @@ abcd.call(obj);
 // 3. Apply -
 
 function abc(a, b, c){
-    console.log(this)
+    console.log(this.age + a + b + c)
 }
 
 var obj = { age: 24 }
