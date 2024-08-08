@@ -12,12 +12,8 @@
 // 8. Creating MongoDB User
 // 9. Connecting MongoDB Cluster
 
-// AneBr2MTSMUZvtIO
-
 
 // DB_URI = "mongodb+srv://<username>:<password>@mern-projects.pn3jint.mongodb.net/<DB_NAME>?retryWrites=true&w=majority";
-
-// mongodb+srv://yashu1singh1111:nxEP7bkbqh4wYkZh@cluster0.uvfyg.mongodb.net/haveli?retryWrites=true&w=majority
 
 
 // 1. Components of URI -
