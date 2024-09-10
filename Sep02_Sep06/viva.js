@@ -2,10 +2,10 @@
 // Q-1 : What will be the output of the following code?
 
 // var animal = "cat";
-// if(-1) {
+// if(1) {
 //     animal = "panda";
 //     function animal(){};
-//     console.log(animal)
+//     console.log(animal);
 //     animal = "horse";
 // }
 // console.log(animal);
@@ -20,12 +20,10 @@
 
 
 
-
-
 // Q-2 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use(async (req, res, next) => {
@@ -59,17 +57,26 @@
 // Q-3 : How would you modify this middleware to deny access to '/admin' routes from specific IP addresses?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // // req.ip == 'None'
+// const ip = "None"
 
 // app.use((req, res, next) => {
 //     if (req.path.startsWith('/admin')) {
 //         console.log(`Admin access attempt from IP: ${req.ip}`);
+//         if(ip != "None"){
+//             next()
+//         }
+//     } else {
+//         next();
 //     }
-//     next();
 // });
+
+// app.get('/', (req, res) => {
+//     res.send('Home Page');
+// })
 
 // app.get('/admin/dashboard', (req, res) => {
 //     res.send('Admin Dashboard');
@@ -94,23 +101,26 @@
 
 
 
-// Q-4 : Create router-level middleware that checks the user's role before allowing access to certain routes. Assume the user's role is available in 'req.user.role'
+// Q-4 : Why might the console.log in the second middleware not accurately reflect the request duration? How can you correctly calculate the time taken to process the request?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
-//     req.startTime = new Date().toISOString();
+//     req.startTime = new Date().getTime();
+//     console.log(new Date().toLocaleTimeString())
 //     next();
 // });
 
-// app.get('/', (req, res) => {
-//     res.send('Hello, World!');
+// app.get('/', (req, res, next) => {
+//     res.send("Home Page")
+//     next();
 // });
 
 // app.use((req, res, next) => {
-//     console.log(`Request processed in ${new Date().toISOString() - new Date(req.startTime)}ms`);
+//     // res.end()
+//     console.log(`Request processed in ${new Date().getTime() - new Date(req.startTime)}ms`);
 //     next();
 // });
 
@@ -128,14 +138,14 @@
 // Q-5 : How would you modify this middleware to send different responses based on the environment (development vs. production)?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.get('/error', (req, res, next) => {
 //     const err = new Error('Something went wrong');
 //     err.status = 500;
 //     // console.log(err)
-//     next();
+//     next(err);
 // });
 
 // app.use((err, req, res, next) => {
@@ -158,11 +168,52 @@
 
 
 
+// Q-5.1 : Passing arguments to next()
+
+
+// import express from 'express'
+// const app = express();
+
+// app.use((req, res, next) => {
+//     req.startTime = new Date().getTime();
+//     console.log(new Date().toLocaleTimeString())
+//     const val = {name: "Yash", job: "Developer"}
+//     next();
+// });
+
+// app.get('/', (req, res, next) => {
+//     // res.send('Hello, World!');
+//     // console.log(val)
+//     const val = {name: "Yash", job: "Developer"}
+//     // next(val);
+//     res.json("Something")
+//     next(val)
+// });
+
+// app.use((req, res, next) => {
+//     console.log(`Request processed in ${new Date().getTime() - new Date(req.startTime)}ms`);
+//     next();
+// });
+
+// app.use((err, req, res, next) => {
+//     console.log(err)
+//     res.status(400).end("Finally");
+// });
+
+// app.listen(3002, () => console.log('Server running on port 3002'));
+
+
+
+
+
+
+
+
 
 // Q-6 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.get('/', (req, res, next) => {
@@ -187,19 +238,19 @@
 // Q-7 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.get('/', (req, res, next) => {
 //     setTimeout(() => {
-//         res.send('Home Page1');
+//         res.end('Home Page1');
 //     }, 2000)
-//     // next();
+//     next();
 // });
 
 // app.use((req, res, next) => {
 //     console.log("Middleware")
-//     res.send('Home Page2');
+//     res.write('Home Page2');
 // });
 
 // app.listen(3002, () => console.log('Server running on port 3002'));
@@ -215,7 +266,7 @@
 // Q-8 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.get('/', (req, res, next) => {
@@ -241,7 +292,7 @@
 // Q-9 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -266,7 +317,7 @@
 // Q-10 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -283,7 +334,7 @@
 //         console.log("Main function")
 //     }, 2000)
 // });
-// // Middleware 
+
 // app.listen(3002, () => console.log('Server running on port 3002'));
 
 
@@ -294,7 +345,7 @@
 // Q-11 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -320,7 +371,7 @@
 // Q-12 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -329,6 +380,7 @@
 //         console.log("Middleware2")
 //     })
 //     res.send('Home Page2');
+//     next()
 // });
 
 // app.get('/', (req, res, next) => {
@@ -344,7 +396,7 @@
 // Q-13 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -369,7 +421,7 @@
 // Q-14 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -395,7 +447,7 @@
 // Q-15 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -421,7 +473,7 @@
 // Q-16 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -447,7 +499,7 @@
 // Q-17 : What will be the output of the following code?
 
 
-// const express = require('express');
+// import express from 'express'
 // const app = express();
 
 // app.use((req, res, next) => {
@@ -479,14 +531,32 @@
 
 
 
-// Q-18 : Why might the console.log in the second middleware not accurately reflect the request duration? How can you correctly calculate the time taken to process the request?
 
-// const express = require('express');
+// Q-18 : Create router-level middleware that checks the user's role before allowing access to certain routes. Assume the user's role is available in 'req.user.role'
+
+// import express from 'express'
 // const app = express();
 // const adminRouter = express.Router();
 // const userRouter = express.Router();
 
 // // req.user.role == admin || user
+
+// const role = "admin"
+// const checkUser = (req, res, next) => {
+//     if(role != "user"){
+//         res.status(403).send("Access denied")
+//     } else {
+//         next();
+//     }
+// }
+
+// const checkAdmin = (req, res, next) => {
+//     if(role != "admin"){
+//         res.status(403).send("Access denied")
+//     } else {
+//         next();
+//     }
+// }
 
 
 // adminRouter.get('/dashboard', (req, res) => {
@@ -497,8 +567,8 @@
 //     res.send('User Dashboard');
 // });
 
-// app.use('/admin', adminRouter);
-// app.use('/user', userRouter);
+// app.use('/admin', checkAdmin, adminRouter);
+// app.use('/user', checkUser, userRouter);
 
 // app.listen(3002, () => console.log('Server running on port 3002'));
 
@@ -515,16 +585,25 @@
 
 // Q-19 : What are the potential consequences of using fs.readFileSync in a high-traffic application, and how does switching to the asynchronous fs.readFile improve performance?
 
-// const express = require('express');
+// import express from 'express'
 // const fs = require('fs');
 // const app = express();
 
 // app.get('/read-file', (req, res) => {
-//     const data = fs.readFileSync('/path/to/large/file.txt', 'utf8');
-//     res.send(data);
+//     // const data = fs.readFileSync('/path/to/large/file.txt', 'utf8');
+//     // res.send(data);
+//     fs.readFile('file.txt', 'utf8', (err, data) => {
+//         if (err) {
+//           res.status(500).send('Error reading file');
+//           return;
+//         }
+//         res.send(data);
+//     });
 // });
 
 // app.listen(3000, () => console.log('Server running on port 3000'));
+
+
 
 
 
@@ -538,13 +617,13 @@
 
 // Q-20 : How can you modify the middleware to handle different content types (e.g., application/x-www-form-urlencoded) and set different size limits for each?
 
-// const express = require('express');
-// const bodyParser = require('body-parser');
+// import express from 'express'
+// // const bodyParser = require('body-parser');
 // const app = express();
 
-// app.use(bodyParser.json({ limit: '10kb' }));
+// // app.use(bodyParser.json());
 
-// app.post('/submit', (req, res) => {
+// app.post('/submit', express.json(), (req, res) => {
 //     res.send('Data received');
 // });
 
@@ -556,7 +635,7 @@
 //     }
 // });
 
-// app.listen(3000, () => console.log('Server running on port 3000'));
+// app.listen(3002, () => console.log('Server running on port 3002'));
 
 
 
